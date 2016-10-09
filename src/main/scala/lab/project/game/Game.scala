@@ -76,10 +76,10 @@ object Direction extends Enumeration {
   def checkBounds(dir: Direction, pos: Vec, speed: Int,
                   width : Int = windowWidth,
                   height: Int = windowHeight): Boolean = dir match {
-      case Right => if (pos.x > width - speed - 1) true else false
-      case Left => if (pos.x < speed + 1) true else false
-      case Up => if (pos.y > height - speed - 1) true else false
-      case Down => if (pos.y < speed + 1) true else false
+      case Right => pos.x > width - speed - 1
+      case Left => pos.x < speed + 1
+      case Up => pos.y > height - speed - 1
+      case Down => pos.y < speed + 1
     }
 }
 

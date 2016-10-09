@@ -22,7 +22,7 @@ object Player extends ShootsBolts {
     override def changeState(changer: GameObject, state: State): Unit = {
       state.neededKeys {
         case ("hit", true) => shieldsDrop()
-        case ("crash", true) => (1 to 5).foreach(_ => shieldsDrop())
+        case ("crash", true) => shieldsDrop(5)
       }
     }
   }
@@ -65,12 +65,12 @@ object Player extends ShootsBolts {
   }
 
   /**
-   * If player has shields it drops them by 1,
+   * If player has shields it drops them by the amount of damage,
    * otherwise player dies and it's game over.
    */
-  private def shieldsDrop(): Unit = {
-    if (shields > 0) {
-      shields -= 1
+  private def shieldsDrop(damage: Int = 1): Unit = {
+    if (shields >= damage) {
+      shields -= damage
     } else {
       alive = false
     }
